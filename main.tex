@@ -52,7 +52,7 @@ The architectural history of digital computation has been inextricably coupled t
 
 These material boundaries were never arbitrary limitations; they were the essential, protective vessel that enabled the birth of digital logic. We honor the generations of physicists, metallurgists, and engineers whose mastery of high-temperature thermodynamics provided the stable ground upon which civilization learned to compute.
 
-\subsection{Tuning the Instrument: The $42\,\mu\text{W}$ Still Point}
+\subsection{Tuning the Instrument: The \texorpdfstring{$42\,\mu\text{W}$}{42-Microwatt} Still Point}
 
 When computation is refactored around minimal concatenative geometry—zero-operand dual-stack Forth topologies, spatial coordinate frames, and combinatorial Andean Yupana arithmetic~\cite{hayden2026k8,lattice2020ice40}—the silicon execution pipeline sheds the massive switching overhead of register-file multiplexers and speculative execution.
 
@@ -139,34 +139,37 @@ m_{\text{envelope}} &= A \cdot t \cdot \rho_m = 0.7854 \cdot (12\times 10^{-6}) 
 m_{\text{gross\_lift}} &= V \cdot \Delta \rho = 0.06545 \times 0.2288 \approx 14.97\,\text{g}
 \end{align}
 
-Subtracting envelope mass yields a maximum net payload capacity of:
-\begin{equation}
-\Delta m_{\text{payload, max}} = m_{\text{gross\_lift}} - m_{\text{envelope}} = 14.97\,\text{g} - 13.10\,\text{g} = 1.87\,\text{g}
-\end{equation}
+Subtracting envelope mass yields a maximum net payload capacity:
+\begin{align}
+\Delta m_{\text{payload, max}} &= m_{\text{gross\_lift}} - m_{\text{envelope}} \nonumber \\
+&= 14.97\,\text{g} - 13.10\,\text{g} = 1.87\,\text{g}
+\end{align}
 
 Our total integrated electronic payload consumes only $1.46\,\text{g}$ (Table~\ref{tab:strat_mass}), leaving $0.41\,\text{g}$ of positive free lift for steady vertical ascent to float equilibrium.
 
 \begin{table}[ht]
 \centering
-\small
+\footnotesize
 \caption{Mass Budget for the $1.46\text{-Gram}$ Stratospheric Node}
 \label{tab:strat_mass}
+\resizebox{\columnwidth}{!}{
 \begin{tabular}{llr}
 \toprule
-\textbf{Component} & \textbf{Physical Implementation} & \textbf{Mass (mg)} \\
+\textbf{Component} & \textbf{Physical Form} & \textbf{Mass (mg)} \\
 \midrule
 iCE40UP5K Core & WLCSP-30 Bare Die & $4.8$ \\
 SX1262 LoRa Radio & QFN-24 Bare Die & $8.2$ \\
-Substrate Ribbon & $25\,\mu\text{m}$ Kapton Film ($10 \times 40\,\text{mm}$) & $142.0$ \\
-Printed Circuit & Sintered Silver Nanoparticles & $18.5$ \\
-Photovoltaic Strip & Ultra-thin GaAs Film ($15\,\mu\text{m}$) & $480.0$ \\
-Energy Buffer & $3.0\,\text{V}$, $0.5\,\text{F}$ Thin-Profile EDLC & $410.0$ \\
-RF Antenna & $8.2\,\text{cm}$ Enamel Copper ($\lambda/4$) & $350.0$ \\
-Passives \& Resins & 0201 Capacitors + UV Adhesive & $45.0$ \\
+Substrate Ribbon & $25\,\mu\text{m}$ Kapton ($10 \times 40\,\text{mm}$) & $142.0$ \\
+Printed Circuit & Sintered Ag Nanoparticles & $18.5$ \\
+Photovoltaic Strip & GaAs Film ($15\,\mu\text{m}$, $10\,\text{cm}^2$) & $480.0$ \\
+Energy Buffer & $3.0\,\text{V}$, $0.5\,\text{F}$ EDLC & $410.0$ \\
+RF Antenna & $8.2\,\text{cm}$ Enamel Wire ($\lambda/4$) & $350.0$ \\
+Passives \& Resins & 0201 Passives + UV Resin & $45.0$ \\
 \midrule
-\textbf{Total Dry Mass} & & \textbf{1,458.5 mg} ($1.46\,\text{g}$) \\
+\textbf{Total Dry Mass} & & \textbf{1,458.5} ($1.46\,\text{g}$) \\
 \bottomrule
 \end{tabular}
+}
 \end{table}
 
 \subsection{Photovoltaic Harvesting at AM0/AM1.5}
@@ -312,12 +315,13 @@ Table~\ref{tab:master_materials} synthesizes the physical, electrical, and manuf
 
 \begin{table*}[t]
 \centering
-\small
+\footnotesize
 \caption{Comprehensive Physical and Manufacturing Matrix of Unconventional Computing Substrates}
 \label{tab:master_materials}
-\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lccccc@{}}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{lccccc}
 \toprule
-\textbf{Parameter} & \textbf{Stratospheric BoPET} & \textbf{Cotton Rag Paper} & \textbf{Woven E-Textile} & \textbf{Fungal Mycelium} & \textbf{Architectural Glass} \\
+\textbf{Property / Parameter} & \textbf{Stratospheric BoPET} & \textbf{Cotton Rag Paper} & \textbf{Woven E-Textile} & \textbf{Fungal Mycelium} & \textbf{Architectural Glass} \\
 \midrule
 Substrate Thickness & $12\,\mu\text{m}$ & $250\,\mu\text{m}$ & $1.2\,\text{mm}$ & $80\,\mu\text{m}$ & $4.0\,\text{mm}$ \\
 Basis Weight / Density & $16.7\,\text{g/m}^2$ & $300\,\text{gsm}$ & $220\,\text{gsm}$ & $45\,\text{gsm}$ & $10.0\,\text{kg/m}^2$ \\
@@ -325,11 +329,12 @@ Dielectric Constant ($\epsilon_r$) & $3.1$ & $2.8$ & $1.8$ & $2.4$ & $6.8$ \\
 Conductive Medium & Sintered AgNP & Laser Graphene (LIG) & Ag-Polyamide Yarn & PVD Zinc ($200\,\text{nm}$) & Sputtered ITO \\
 Trace Sheet Resistance & $<0.05\,\Omega/\Box$ & $15\text{--}35\,\Omega/\Box$ & $<0.15\,\Omega/\Box$ & $0.8\,\Omega/\Box$ & $10\text{--}14\,\Omega/\Box$ \\
 Die Bonding Method & ACF Tape & Conductive Epoxy & Interposer Stitched & ACP Cold-Paste & Ultrasonic Flip-Chip \\
-Primary Energy Source & GaAs Solar ($100\,\text{mW}$) & RF Harvesting / Cell & Kinetic Piezo / LiPo & Microbial Soil Cell & Transparent LSC Solar \\
+Primary Energy Source & GaAs Solar ($308\,\text{mW}$) & RF Harvesting / Cell & Kinetic Piezo / LiPo & Microbial Soil Cell & Transparent LSC Solar \\
 Operational Lifespan & $6\text{--}12$ Months & $10\text{--}100+$ Years & $2\text{--}5$ Years & $60\text{--}90$ Days & $50+$ Years \\
 End-of-Life State & Ocean Sink & $100\%$ Recyclable & Reclaimed Fiber & $100\%$ Bio-Compost & Permanent Mineral \\
 \bottomrule
-\end{tabular*}
+\end{tabular}
+}
 \end{table*}
 
 ---
