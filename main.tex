@@ -35,7 +35,7 @@
 \maketitle
 
 \begin{abstract}
-For over eight decades, electronic engineering has built its foundations within the thermal requirements of high-power computation, relying on rigid fiberglass-epoxy laminates (FR4), heavy copper heat-spreading planes, and active cooling envelopes. These material constraints served as the indispensable cradle that allowed humanity to discover and master the digital art. In this work, we demonstrate that when discrete stack-machine architectures (such as the Regulus K8 core) achieve harmonic operational stillness at sub-milliwatt dissipation ($42\,\mu\text{W}$ at $1.2\,\text{MHz}$), the fundamental surface thermal flux drops to $q'' \approx 9.09\,\text{W/m}^2$, yielding a steady-state temperature rise of $\Delta T < 0.001^{\circ}\text{C}$. 
+For over eight decades, electronic engineering has built its foundations within the thermal requirements of high-power computation, relying on rigid fiberglass-epoxy laminates (FR4), heavy copper heat-spreading planes, and active cooling envelopes. These material constraints served as the indispensable cradle that allowed humanity to discover and master the digital art. In this work, we demonstrate that when discrete stack-machine architectures (such as the Regulus K8 core) achieve harmonic operational stillness at sub-milliwatt dissipation ($42\,\mu\text{W}$ at $1.2\,\text{MHz}$), the fundamental surface thermal flux drops to $q'' \approx 9.09\,\text{W/m}^2$, yielding a steady-state temperature rise of $\Delta T < 0.001^{\circ}\text{C}$ (Biot number $\text{Bi} \approx 4.6 \times 10^{-5}$). 
 
 With the subsidence of thermal friction, computation is no longer bound to the rigid board. Guided by the principles of material resonance and honored constraint, we formalize and characterize five physical computing media: (1)~\textbf{Stratospheric Pico-Balloons}, achieving a $1.46\text{-gram}$ autonomous solar computing node on $12\,\mu\text{m}$ aluminized Mylar with an unobstructed $500\text{-km}$ line-of-sight LoRa mesh horizon ($+9.64\,\text{dB}$ fade margin); (2)~\textbf{Plant Cellulose and Rag Paper}, utilizing laser-induced graphene (LIG) and screen-printed silver inks to embed living Forth codices with tactile Andean Yupana calculating sensels; (3)~\textbf{Woven E-Textiles}, employing silver-plated nylon yarns and sinusoidal Euler elastica crimp geometry to build strain-decoupled wearable computing garments; (4)~\textbf{Myco-Electronics}, utilizing fungal mycelium biopolymer skins (*Ganoderma lucidum*) with transient zinc metallization for 60-day compostable ecological sensors; and (5)~\textbf{Architectural Glass and Ceramics}, embedding transparent conductive oxides (ITO) and surface acoustic wave (SAW) transducers for invisible ambient infrastructure. 
 
@@ -48,7 +48,7 @@ All substrates interface seamlessly through the scale-invariant 64-byte CordLink
 
 \section{The Cradle of Heavy Silicon and the Harmonic Inversion}
 
-The architectural history of digital computation has been inextricably coupled to the physics of thermal dissipation. In classical von Neumann semiconductor design, complex out-of-order execution pipelines, branch predictors, multi-ported register files, and gigahertz clock regimes yield operational power densities on the order of $10^4\text{--}10^6\,\text{W/m}^2$. This massive thermal flux necessitated the development of rigid, highly resilient composite carriers—most notably FR4 (woven fiberglass impregnated with epoxy resin) engineered with high glass transition temperatures ($T_g > 130^{\circ}\text{C}$), multi-layer copper planes for heat conduction, and active cooling envelopes.
+The architectural history of digital computation has been inextricably coupled to the physics of thermal dissipation. In classical von Neumann semiconductor design, complex out-of-order execution pipelines, speculative execution, branch predictors, multi-ported register files, and gigahertz clock regimes yield operational power densities on the order of $10^4\text{--}10^6\,\text{W/m}^2$. This massive thermal flux necessitated the development of rigid, highly resilient composite carriers—most notably FR4 (woven fiberglass impregnated with epoxy resin) engineered with high glass transition temperatures ($T_g > 130^{\circ}\text{C}$), multi-layer copper planes for heat conduction, and active cooling envelopes.
 
 These material boundaries were never arbitrary limitations; they were the essential, protective vessel that enabled the birth of digital logic. We honor the generations of physicists, metallurgists, and engineers whose mastery of high-temperature thermodynamics provided the stable ground upon which civilization learned to compute.
 
@@ -62,23 +62,59 @@ P_{\text{total}} = C_{\text{eff}} V_{\text{DD}}^2 f + I_{\text{leak}} V_{\text{D
 \end{equation}
 evaluated at operating voltage $V_{\text{DD}} = 1.2\,\text{V}$ and clock frequency $f = 1.2\,\text{MHz}$.
 
-\subsection{Thermal Flux Derivation on Bare Silicon Dies}
+\subsection{Thermal Flux and Lumped Capacitance Derivation}
 
-In its bare Wafer-Level Chip Scale Package (WLCSP-30), the physical silicon die occupies a footprint of $A_{\text{die}} = 2.15\,\text{mm} \times 2.15\,\text{mm} = 4.62 \times 10^{-6}\,\text{m}^2$, with a total mass of under $5\,\text{mg}$. The resulting surface heat flux $q''$ across the die area is:
+In its bare Wafer-Level Chip Scale Package (WLCSP-30), the physical silicon die occupies a footprint of $A_{\text{die}} = 2.15\,\text{mm} \times 2.15\,\text{mm} = 4.62 \times 10^{-6}\,\text{m}^2$, thickness $t_{\text{die}} = 0.45\,\text{mm}$, with a total mass of under $5\,\text{mg}$. The resulting surface heat flux $q''$ across the die area is:
 \begin{equation}
 q'' = \frac{P_{\text{total}}}{A_{\text{die}}} = \frac{42 \times 10^{-6}\,\text{W}}{4.62 \times 10^{-6}\,\text{m}^2} \approx 9.09\,\text{W/m}^2
 \end{equation}
 
-Applying Newton's law of cooling for natural air convection with a conservative heat transfer coefficient $h_{\text{air}} \approx 10\,\text{W/(m}^2\cdot\text{K)}$:
+Thermal dissipation from the unencapsulated die to ambient air ($T_{\infty} = 295\,\text{K}$) occurs through coupled natural convection and linearized blackbody radiation:
 \begin{equation}
-\Delta T = \frac{q''}{h_{\text{air}}} = \frac{9.09\,\text{W/m}^2}{10\,\text{W/(m}^2\cdot\text{K)}} \approx 0.00091\,\text{K} \approx 0.00^{\circ}\text{C}
+h_{\text{eff}} = h_{\text{conv}} + h_{\text{rad}} = h_{\text{conv}} + 4 \varepsilon \sigma T_{\infty}^3
 \end{equation}
+Assuming conservative natural convection $h_{\text{conv}} \approx 10.0\,\text{W/(m}^2\cdot\text{K)}$, surface emissivity $\varepsilon_{\text{Si}} \approx 0.90$, and Stefan-Boltzmann constant $\sigma = 5.67 \times 10^{-8}\,\text{W/(m}^2\cdot\text{K}^4)$, we obtain $h_{\text{rad}} \approx 5.24\,\text{W/(m}^2\cdot\text{K)}$, yielding $h_{\text{eff}} \approx 15.24\,\text{W/(m}^2\cdot\text{K)}$.
+
+The steady-state surface temperature rise $\Delta T = T_{\text{die}} - T_{\infty}$ is:
+\begin{equation}
+\Delta T = \frac{q''}{h_{\text{eff}}} = \frac{9.09\,\text{W/m}^2}{15.24\,\text{W/(m}^2\cdot\text{K)}} \approx 0.000596\,\text{K} \approx 0.00^{\circ}\text{C}
+\end{equation}
+
+To verify whether thermal gradients exist within the die, we evaluate the Biot number ($\text{Bi}$):
+\begin{equation}
+\text{Bi} = \frac{h_{\text{eff}} L_c}{k_{\text{Si}}} = \frac{15.24 \times (0.45 \times 10^{-3})}{148} \approx 4.63 \times 10^{-5} \ll 0.1
+\end{equation}
+where $k_{\text{Si}} = 148\,\text{W/(m}\cdot\text{K)}$ is the thermal conductivity of silicon. Because $\text{Bi} \ll 0.1$, the lumped capacitance approximation holds strictly: the silicon die operates at absolute spatial isothermality with zero localized thermal hot-spots.
 
 \subsection{The Material Harmonic Principle}
 
-Because the steady-state thermal rise $\Delta T$ is under one-thousandth of a degree Celsius, thermal degradation, thermal expansion coefficient mismatches ($\Delta \text{CTE}$), and outgassing constraints subside. 
+Because the thermal rise $\Delta T$ is under one-thousandth of a degree, thermal expansion coefficient mismatches ($\Delta \text{CTE}$), outgassing, and delamination constraints subside. 
 
 \textbf{The Material Harmonic Principle (The Lesson of Euterpe):} \textit{When an instrument is tuned to thermodynamic stillness, it no longer requires a heavy cast vessel to contain its vibrations. Any physical medium capable of sustaining patterned conductive pathways—regardless of its flexural elasticity, organic origin, or optical transparency—can function as an authentic, durable host body for digital intelligence.}
+
+---
+
+\section{The Historical Arc of Discoverable Compute: From Fiber to Furnace and Back}
+
+When unconventional material computation is viewed through the long arc of intellectual history, it ceases to look like a radical departure; rather, it represents the harmonic completion of a 5,000-year cycle of human thought.
+
+\subsection{The Ancient Tactile Matrix}
+Before computation was abstracted into electromagnetic switching, it was tactile, embodied, and woven directly into natural fibers and mechanical clockwork. In the ancient Andes, the Khipu (UR006, UR022) and the Yupana calculating matrix encoded multi-dimensional relational databases, fiscal task dispatchers, and astronomical ephemerides in spun alpaca cords, structural plies ($S/Z$), and stone matrices~\cite{hayden2026cordlink}. In the Hellenistic Mediterranean, the 30-gear bronze Antikythera mechanism computed Metonic, Callippic, and Saros lunar-solar cycles through physical differential gearing. Computation was portable, non-volatile, and operated at zero external power.
+
+\subsection{Lovelace's Jacquard Prophecy}
+In 1843, Ada Lovelace observed of Babbage's Analytical Engine:
+\begin{quote}
+\textit{``The Analytical Engine weaves algebraic patterns just as the Jacquard loom weaves flowers and leaves.''}~\cite{lovelace1843,babbage1864}
+\end{quote}
+For nearly two centuries, Lovelace's comparison remained a metaphorical bridge. The Jacquard loom used punched cards to direct silk threads, while digital engines executed instructions inside rigid cabinets. In our e-textile and paper architectures, that metaphor becomes literal physics: the yarn geometry and the paper fibers *are* the computational body.
+
+\subsection{The Heavy Silicon Chrysalis}
+The subsequent rise of the von Neumann architecture and gigahertz silicon represented an indispensable chrysalis. To discover solid-state physics, photolithography, and universal logic, civilization had to build heavy, heat-dissipating furnaces. The rigid green FR4 board was the fortress that kept fragile semiconductor junctions safe while humanity explored the rules of computation.
+
+\subsection{Cybernetic Homeostasis and Reciprocity}
+In the mid-20th century, Norbert Wiener and W. Ross Ashby formalized cybernetics—the science of feedback, ultrastability, and homeostasis~\cite{wiener1948,ashby1952}. Ashby's *Homeostat* demonstrated that true viability emerges when a system adapts its internal state to achieve equilibrium with its environment rather than dominating it through brute force.
+
+Our sub-milliwatt crystalline architecture realizes this homeostatic ideal: when a fault occurs, the core enters the Inverted-T Centroid Trap ($\text{outdegree} = 0$), ceasing energy dissipation in microseconds; when an ecological sensor finishes its season, its mycelium body dissolves into soil nutrients. Computation ceases to be an alien, extractive intrusion and returns to homeostatic reciprocity (*Ayni*) with the natural world.
 
 ---
 
@@ -88,21 +124,29 @@ The paradigm of ``cloud computing'' has historically referred to centralized, gr
 
 \subsection{Aerostatic Buoyancy and Mass Budget}
 
-At an operating altitude of $h = 13\,\text{km}$, the ambient atmospheric pressure drops to $P \approx 16.5\,\text{kPa}$ with temperature $T \approx 216.5\,\text{K}$ ($-56.5^{\circ}\text{C}$), yielding an air density:
-\begin{equation}
-\rho_{\text{air}} = \frac{P M_{\text{air}}}{R T} \approx \frac{16500 \times 0.02897}{8.314 \times 216.5} \approx 0.265\,\text{kg/m}^3
-\end{equation}
+In the lower stratosphere ($h = 13\,\text{km}$), the ambient atmospheric pressure drops to $P = 16.51\,\text{kPa}$ with temperature $T = 216.65\,\text{K}$ ($-56.5^{\circ}\text{C}$) under the US Standard Atmosphere model.
 
-For a zero-pressure spherical pico-balloon constructed from $12\,\mu\text{m}$ aluminized biaxially-oriented polyethylene terephthalate (BoPET/Mylar, $\rho_m = 1.39\,\text{g/cm}^3$) with radius $r = 0.25\,\text{m}$ ($V = 0.0654\,\text{m}^3$, surface area $A = 0.785\,\text{m}^2$):
+The specific gas constants for dry air and helium are $R_{\text{air}} = 287.058\,\text{J/(kg}\cdot\text{K)}$ and $R_{\text{He}} = 2077.1\,\text{J/(kg}\cdot\text{K)}$, yielding atmospheric and lifting gas densities:
 \begin{align}
-m_{\text{envelope}} &= A \cdot t \cdot \rho_m = 0.785 \cdot 12\times 10^{-6} \cdot 1390 \approx 13.1\,\text{g}\\
-F_{\text{buoyant}} &= V (\rho_{\text{air}} - \rho_{\text{He}}) g = 0.0654 \cdot (0.265 - 0.037) \cdot 9.81 \nonumber \\
-&\approx 0.146\,\text{N} \implies m_{\text{gross\_lift}} \approx 14.9\,\text{g}
+\rho_{\text{air}} &= \frac{P}{R_{\text{air}} T} = \frac{16510}{287.058 \times 216.65} \approx 0.2655\,\text{kg/m}^3 \\
+\rho_{\text{He}} &= \frac{P}{R_{\text{He}} T} = \frac{16510}{2077.1 \times 216.65} \approx 0.0367\,\text{kg/m}^3 \\
+\Delta \rho &= \rho_{\text{air}} - \rho_{\text{He}} \approx 0.2288\,\text{kg/m}^3
 \end{align}
 
-Subtracting envelope mass leaves a net available payload capacity of $\Delta m \approx 1.8\,\text{g}$, perfectly accommodating our $1.46\text{-gram}$ integrated node (Table~\ref{tab:strat_mass}).
+For a zero-pressure spherical pico-balloon of radius $r = 0.25\,\text{m}$ ($V = \frac{4}{3}\pi r^3 \approx 0.06545\,\text{m}^3$, surface area $A = 4\pi r^2 \approx 0.7854\,\text{m}^2$) fabricated from $12\,\mu\text{m}$ aluminized BoPET film ($\rho_m = 1390\,\text{kg/m}^3$)~\cite{sterran2019picoballoon}:
+\begin{align}
+m_{\text{envelope}} &= A \cdot t \cdot \rho_m = 0.7854 \cdot (12\times 10^{-6}) \cdot 1390 \approx 13.10\,\text{g} \\
+m_{\text{gross\_lift}} &= V \cdot \Delta \rho = 0.06545 \times 0.2288 \approx 14.97\,\text{g}
+\end{align}
 
-\begin{table}[h]
+Subtracting envelope mass yields a maximum net payload capacity of:
+\begin{equation}
+\Delta m_{\text{payload, max}} = m_{\text{gross\_lift}} - m_{\text{envelope}} = 14.97\,\text{g} - 13.10\,\text{g} = 1.87\,\text{g}
+\end{equation}
+
+Our total integrated electronic payload consumes only $1.46\,\text{g}$ (Table~\ref{tab:strat_mass}), leaving $0.41\,\text{g}$ of positive free lift for steady vertical ascent to float equilibrium.
+
+\begin{table}[ht]
 \centering
 \small
 \caption{Mass Budget for the $1.46\text{-Gram}$ Stratospheric Node}
@@ -127,7 +171,7 @@ Passives \& Resins & 0201 Capacitors + UV Adhesive & $45.0$ \\
 
 \subsection{Photovoltaic Harvesting at AM0/AM1.5}
 
-In the lower stratosphere, cloud attenuation is absent, and solar irradiance approaches extraterrestrial levels ($G \approx 1{,}100\text{--}1{,}360\,\text{W/m}^2$). An ultra-lightweight single-junction GaAs photovoltaic strip ($20\,\text{mm} \times 50\,\text{mm} = 10^{-3}\,\text{m}^2$) with $28\%$ conversion efficiency delivers:
+In the lower stratosphere, tropospheric cloud attenuation is absent, and solar irradiance approaches extraterrestrial levels ($G \approx 1{,}100\text{--}1{,}360\,\text{W/m}^2$). An ultra-lightweight single-junction GaAs photovoltaic strip ($20\,\text{mm} \times 50\,\text{mm} = 10^{-3}\,\text{m}^2$) with $28\%$ conversion efficiency delivers:
 \begin{equation}
 P_{\text{harvest}} = G \cdot A_{\text{pv}} \cdot \eta = 1100 \cdot 10^{-3} \cdot 0.28 \approx 308\,\text{mW}
 \end{equation}
@@ -143,24 +187,24 @@ d_{\text{LOS}} = \sqrt{2 \cdot \frac{4}{3} R_E h_1} \approx \sqrt{2 \cdot 8495 \
 To elevated ground stations ($h_2 = 1{,}500\,\text{m}$), $d_{\text{LOS}}$ extends beyond $629\,\text{km}$.
 
 \subsubsection{Path Loss and Decodability Proof}
-The Free-Space Path Loss ($FSPL$) at frequency $f = 915\,\text{MHz}$ over distance $d = 500\,\text{km}$ is:
+According to the Friis transmission formula~\cite{friis1946simple}, the Free-Space Path Loss ($FSPL$) at frequency $f = 915\,\text{MHz}$ ($\lambda \approx 0.3276\,\text{m}$) over distance $d = 500\,\text{km}$ is:
 \begin{align}
 FSPL &= 20\log_{10}(d) + 20\log_{10}(f) - 147.55 \nonumber \\
 &= 20\log_{10}(5 \times 10^5) + 20\log_{10}(9.15 \times 10^8) - 147.55 \nonumber \\
 &= 113.98 + 179.23 - 147.55 = 145.66\,\text{dB}
 \end{align}
 
-Given transmitter power $P_{\text{TX}} = +14\,\text{dBm}$ ($25\,\text{mW}$) and quarter-wave antenna gains $G_{\text{TX}} = G_{\text{RX}} = +2.15\,\text{dBi}$, the received signal power $P_{\text{RX}}$ is:
+Given transmitter power $P_{\text{TX}} = +14\,\text{dBm}$ ($25\,\text{mW}$) and quarter-wave monopole antenna gains $G_{\text{TX}} = G_{\text{RX}} = +2.15\,\text{dBi}$, the received power $P_{\text{RX}}$ is:
 \begin{align}
 P_{\text{RX}} &= P_{\text{TX}} + G_{\text{TX}} + G_{\text{RX}} - FSPL \nonumber \\
 &= 14 + 2.15 + 2.15 - 145.66 = -127.36\,\text{dBm}
 \end{align}
 
-For LoRa Spreading Factor $\text{SF} = 10$ at bandwidth $B = 125\,\text{kHz}$, the SX1262 receiver sensitivity threshold is $S_{\text{RX}} = -137.0\,\text{dBm}$~\cite{semtech2020sx1262}. The resulting fade margin $M$ is:
+The thermal noise floor at bandwidth $B = 125\,\text{kHz}$ is $N_0 = -174\,\text{dBm/Hz} + 10\log_{10}(125{,}000) = -123.03\,\text{dBm}$. With a receiver noise figure $\text{NF} = 6.0\,\text{dB}$ and LoRa Chirp Spread Spectrum coding gain operating at $\text{SNR} = -15\,\text{dB}$ for Spreading Factor $\text{SF} = 10$, the SX1262 sensitivity threshold is $S_{\text{RX}} = -137.0\,\text{dBm}$~\cite{semtech2020sx1262}. The resulting fade margin $M$ is:
 \begin{equation}
 M = P_{\text{RX}} - S_{\text{RX}} = -127.36 - (-137.00) = \mathbf{+9.64\,\text{dB}}
 \end{equation}
-This positive link margin proves that a $1.46\text{-gram}$ K8 stratospheric node reliably delivers bit-exact 64-byte CordLink spores across multi-state regions with zero terrestrial infrastructure.
+This positive margin demonstrates that a $1.46\text{-gram}$ K8 stratospheric node reliably delivers bit-exact 64-byte CordLink spores across multi-state regions with zero terrestrial infrastructure.
 
 ---
 
@@ -179,7 +223,7 @@ AgNP formulations (particle diameter $20\text{--}50\,\text{nm}$) deposited throu
 \end{equation}
 
 \subsubsection{Laser-Induced Graphene (LIG)}
-Utilizing a standard $450\,\text{nm}$ continuous-wave diode laser ($P = 2.5\,\text{W}$, scan speed $v = 40\,\text{mm/s}$), localized photothermal pyrolysis cleaves $\text{C--O}$ and $\text{C--H}$ bonds in the cellulose matrix, rehybridizing carbon atoms into multi-layer 3D porous graphene networks~\cite{tour2014laser}. LIG traces exhibit sheet resistance $R_s \approx 15\text{--}35\,\Omega/\Box$ and require zero chemical consumables or metals.
+Utilizing a standard $450\,\text{nm}$ continuous-wave diode laser ($P = 2.5\,\text{W}$, scan speed $v = 40\,\text{mm/s}$), localized photothermal pyrolysis cleaves $\text{C--O}$ and $\text{C--H}$ bonds in the cellulose matrix, rehybridizing carbon atoms into multi-layer 3D porous graphene networks~\cite{tour2014laser,chyan2018laser}. LIG traces exhibit sheet resistance $R_s \approx 15\text{--}35\,\Omega/\Box$ and require zero chemical consumables or metals.
 
 \subsection{Tactile Yupana Matrix Integration}
 
@@ -195,7 +239,7 @@ Touching a printed cup shifts the charge timing by $\Delta t \approx 12\text{--}
 
 \section{E-Textiles: Andean Cumbi Weaving}
 
-In ancient Andean computing, state was encoded through fiber geometry, spin orientation ($S/Z$), and structural ply hierarchy~\cite{hayden2026cordlink}. E-textile computing integrates micro-silicon directly into woven cloth.
+In ancient Andean computing, state was encoded through fiber geometry, spin orientation ($S/Z$), and structural ply hierarchy~\cite{hayden2026cordlink}. E-textile computing integrates micro-silicon directly into woven cloth~\cite{stoppa2014wearable}.
 
 \subsection{Yarn Tribology and Strain-Decoupled Crimp Geometry}
 
@@ -220,7 +264,7 @@ The $2.15\,\text{mm}$ WLCSP silicon die is bonded to a flexible $50\,\mu\text{m}
 
 \section{Myco-Electronics: Compostable Computing}
 
-Electronic waste represents an urgent ecological challenge for modern technology. Myco-electronics establishes computing devices engineered to complete their life cycle by returning peacefully to the soil~\cite{danninger2022mycelium}.
+Electronic waste represents an urgent ecological challenge for modern technology. Myco-electronics establishes computing devices engineered to complete their life cycle by returning peacefully to the soil~\cite{danninger2022mycelium,hwang2012transient}.
 
 \subsection{Fungal Mycelium Biopolymer Matrices}
 
@@ -258,7 +302,7 @@ By magnetron sputtering Indium Tin Oxide (ITO, $\text{In}_2\text{O}_3:\text{Sn}$
 
 To eliminate external wiring, glass-embedded K8 nodes communicate through the structural pane using high-frequency ultrasonic transducers (piezoelectric PZT-5H discs, thickness resonance $f_0 = 1.8\,\text{MHz}$). 
 
-Data is transmitted using acoustic binary phase-shift keying (BPSK) along the glass plate, establishing a $100\,\text{kbps}$ data link across windows and structural building frames without penetrations or visual alteration of building aesthetics.
+Data is transmitted using acoustic binary phase-shift keying (BPSK) along the glass plate ($v_R \approx 3{,}150\,\text{m/s}$, attenuation $\alpha \approx 0.05\,\text{dB/cm}$), establishing a $100\,\text{kbps}$ data link across windows and structural building frames without penetrations or visual alteration of building aesthetics.
 
 ---
 
